@@ -1,13 +1,15 @@
+ 
 #include <Adafruit_MLX90614.h>
 //#include <Adafruit_GFX.h> 
 #define BLYNK_PRINT Serial
-#define BLYNK_TEMPLATE_ID "TMPLcPQwAEHL"
-#define BLYNK_DEVICE_NAME "MLX90614"
 //#include <Blynk.h>
 #include <ESP8266WiFi.h>
 #include <BlynkSimpleEsp8266.h>
 
-#define BLYNK_AUTH_TOKEN "4tDhAEbL2Cti6F0cShP_uvNlsRYDdVMZ"
+
+#define BLYNK_TEMPLATE_ID "TEMPLATEID"
+#define BLYNK_DEVICE_NAME "Control Bulb Pump Using Blynk IOT"
+#define BLYNK_AUTH_TOKEN "AUTHTOKEN"
  
 Adafruit_MLX90614 mlx = Adafruit_MLX90614();
  
@@ -16,8 +18,8 @@ double temp_obj;
 double calibration = 2.36;
  
 char auth[] = BLYNK_AUTH_TOKEN;    // You should get Auth Token in the Blynk App.
-char ssid[] = "bhavani_singh";                       // Your WiFi credentials.
-char pass[] = "Bhavani$0611";
+char ssid[] = "WiFi Username";                       // Your WiFi credentials.
+char pass[] = "WiFi Password";
  
 void setup()
 {
