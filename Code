@@ -1,0 +1,54 @@
+#include <Adafruit_MLX90614.h>
+//#include <Adafruit_GFX.h> 
+#define BLYNK_PRINT Serial
+#define BLYNK_TEMPLATE_ID "TMPLcPQwAEHL"
+#define BLYNK_DEVICE_NAME "MLX90614"
+//#include <Blynk.h>
+#include <ESP8266WiFi.h>
+#include <BlynkSimpleEsp8266.h>
+
+#define BLYNK_AUTH_TOKEN "4tDhAEbL2Cti6F0cShP_uvNlsRYDdVMZ"
+ 
+Adafruit_MLX90614 mlx = Adafruit_MLX90614();
+ 
+double temp_amb;
+double temp_obj;
+double calibration = 2.36;
+ 
+char auth[] = BLYNK_AUTH_TOKEN;    // You should get Auth Token in the Blynk App.
+char ssid[] = "bhavani_singh";                       // Your WiFi credentials.
+char pass[] = "Bhavani$0611";
+ 
+void setup()
+{
+  Serial.begin(9600);
+  mlx.begin();         //Initialize MLX90614
+ 
+  Blynk.begin(auth, ssid, pass);
+  
+  Serial.println("Temperature Sensor MLX90614");
+  
+  delay(2500);
+}
+ 
+void loop()
+{
+  //Reading room temperature and object temp
+  //for reading Fahrenheit values, use
+  //mlx.readAmbientTempF() , mlx.readObjectTempF() )
+  Blynk.run();
+  temp_amb = mlx.readAmbientTempC();
+  temp_obj = mlx.readObjectTempC();
+ 
+  //Serial Monitor
+  Serial.print("Room Temp = ");
+  Serial.println(temp_amb);
+  Serial.print("Object temp = ");
+  Serial.println(temp_obj);
+  
+  
+  Blynk.virtualWrite(V1, temp_amb);
+  Blynk.virtualWrite(V2, (temp_obj + calibration));
+  
+  delay(1000);
+}
